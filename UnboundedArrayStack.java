@@ -19,13 +19,19 @@ public class Array<T> {
     }
 
     public T pop() {
-        if (isEmpty()) {
-            throw new IllegalStateException("Stack underflow");
-        }
-        T item = stack[top];
-        stack[top--] = null;
-        return item;
+    if (isEmpty()) {
+        throw new IllegalStateException("Stack underflow");
     }
+
+    T item = stack[top];
+    stack[top--] = null;
+
+    if (size() > 0 && size() == stack.length / 4) {
+        resize(stack.length / 2);
+    }
+
+    return item;
+}
 
     public T peek() {
         if (isEmpty()) {
@@ -66,7 +72,6 @@ public class Array<T> {
         Stack.push(50);
         Stack.push(60);
         Stack.push(70);
-
         System.out.println("Is Full? " + Stack.isFull());
         Stack.printStack();
 
